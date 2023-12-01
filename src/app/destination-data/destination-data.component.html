@@ -1,0 +1,81 @@
+<div style="width: 200px; float: left">
+  <!-- pDroppable="test"
+  (onDrop)="dropOutside(1, $event)" -->
+  <div pDroppable="test" (onDrop)="dropOutside(options1)">
+    <!-- <div> -->
+    <p-listbox
+      [options]="options1"
+      pDroppable="outside"
+      (onDrop)="dropOutside(options1)"
+      [style]="{ width: '12rem', padding: '0' }"
+    >
+      <!-- <ng-template pTemplate="empty">
+        <div style="margin: 10px; background-color: yellowgreen"></div>
+      </ng-template> -->
+      <ng-template pTemplate="item" let-item let-index="index">
+        <div
+          appOnDragHover
+          style="
+            background-color: azure;
+            width: 100%;
+            font-size: small;
+            height: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            align-content: center;
+            padding: 0;
+            margin: 0;
+          "
+          pDraggable="test"
+          pDroppable="test"
+          (onDragStart)="dragStart(index, 0, options1)"
+          (onDragEnter)="dragOver(0, index)"
+        >
+          <!-- (onDrop)="dropInside(options1, index)" -->
+          <h5>{{ item.name }} - {{ item.id }}</h5>
+        </div>
+      </ng-template>
+    </p-listbox>
+  </div>
+  <div pDroppable="test" (onDrop)="dropOutside(options2)">
+    <div>
+      <p-listbox
+        [options]="options2"
+        pDroppable="outside"
+        (onDrop)="dropOutside(options2)"
+      >
+        <!-- (onDragEnter)="dragOver(1)" -->
+        <!-- (onDragEnter)="dragOver($event)" -->
+        <ng-template pTemplate="item" let-item let-index="index">
+          <!-- <div style="margin: 10px" pDraggable="test" pDroppable="test"> -->
+          <div
+            style="background-color: azure; width: 100%"
+            pDraggable="test"
+            pDroppable="test"
+            (onDragStart)="dragStart(index, 1, options2)"
+            (onDragEnter)="dragOver(1, index)"
+          >
+            <h5>{{ item.name }} - {{ item.id }}</h5>
+          </div>
+        </ng-template>
+      </p-listbox>
+    </div>
+  </div>
+</div>
+<div style="width: 200px; float: left; margin: 10px">
+  <div style="border: 1px blue dotted" *ngFor="let item of options1">
+    {{ item.name }}
+  </div>
+  <hr />
+  <div style="border: 1px orangered dotted" *ngFor="let item of options2">
+    {{ item.name }}
+  </div>
+</div>
+<div style="width: 150px; float: left">
+  <p>Start Index : {{ startIndex }}</p>
+  <p>Start List Id : {{ startList }}</p>
+  <p>Insert Over : {{ insertOver }}</p>
+  <p>Destination list: {{ destinationListId }}</p>
+</div>
