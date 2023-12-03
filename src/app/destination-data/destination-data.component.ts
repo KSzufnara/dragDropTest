@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Item } from '../source-data/Item';
 import { DragServiceService } from '../drag-service.service';
 
+interface Column {
+  field: string;
+  header: string;
+}
+
 @Component({
   selector: 'app-destination-data',
   templateUrl: './destination-data.component.html',
@@ -9,6 +14,7 @@ import { DragServiceService } from '../drag-service.service';
 })
 export class DestinationDataComponent implements OnInit {
   constructor(private dragService: DragServiceService) {}
+  cols!: Column[];
   options1: Item[] = [];
   options2: Item[] = [];
 
@@ -34,9 +40,13 @@ export class DestinationDataComponent implements OnInit {
     console.log('Drop: ', event);
   }
   dragOver(destinationLisId: number, index: number = -1) {
-    //console.log('Drag over: ', index, ' event: ', event);
+    console.log('Drag over: ', index);
     this.insertOver = index;
     this.destinationListId = destinationLisId;
+  }
+
+  onMouseOver(num: number) {
+    console.log('Over: ', num);
   }
 
   dropOutside(destList: Item[]) {

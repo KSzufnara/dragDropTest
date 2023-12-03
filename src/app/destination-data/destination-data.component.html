@@ -1,4 +1,63 @@
-<div style="width: 200px; float: left">
+<div style="width: 400px; float: left">
+  <div pDroppable="test" (onDrop)="dropOutside(options1)">
+    <p-table
+      [value]="options1"
+      [reorderableColumns]="true"
+      pDroppable="outside"
+      (onDrop)="dropOutside(options1)"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <!-- <th pReorderableColumn style="width: 3rem"></th> -->
+          <th pReorderableColumn>Task number</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-item let-index="rowIndex">
+        <tr
+          [pReorderableRow]="index"
+          pDroppable
+          (onDragEnter)="dragOver(0, index)"
+          (onDragStart)="dragStart(index, 0, options1)"
+        >
+          <!-- <td>
+              <span class="pi pi-bars" pReorderableRowHandle></span>
+            </td> -->
+          <td pReorderableRowHandle>{{ item.name }} - {{ item.id }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+  <div pDroppable="test" (onDrop)="dropOutside(options2)">
+    <p-table
+      [value]="options2"
+      [reorderableColumns]="true"
+      pDroppable="outside"
+      (onDrop)="dropOutside(options2)"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <!-- <th pReorderableColumn style="width: 3rem"></th> -->
+          <th pReorderableColumn>Task number</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-item let-index="rowIndex">
+        <tr
+          [pReorderableRow]="index"
+          pDroppable
+          (onDragEnter)="dragOver(1, index)"
+          (onDragStart)="dragStart(index, 1, options2)"
+        >
+          <!-- <td>
+              <span class="pi pi-bars" pReorderableRowHandle></span>
+            </td> -->
+          <td pReorderableRowHandle>{{ item.name }} - {{ item.id }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+
+<div style="width: 300px; float: left">
   <!-- pDroppable="test"
   (onDrop)="dropOutside(1, $event)" -->
   <div pDroppable="test" (onDrop)="dropOutside(options1)">
@@ -7,11 +66,31 @@
       [options]="options1"
       pDroppable="outside"
       (onDrop)="dropOutside(options1)"
-      [style]="{ width: '12rem', padding: '0' }"
+      [style]="{ width: '14rem', padding: '0' }"
     >
-      <!-- <ng-template pTemplate="empty">
-        <div style="margin: 10px; background-color: yellowgreen"></div>
-      </ng-template> -->
+      <ng-template pTemplate="empty">
+        <div
+          style="
+            background-color: azure;
+            width: 100%;
+            font-size: small;
+            height: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            align-content: center;
+            padding: 0;
+            margin: 0;
+          "
+          pDraggable="test"
+          pDroppable="test"
+          (onDragEnter)="dragOver(0, 0)"
+        >
+          Place here!
+        </div>
+      </ng-template>
+
       <ng-template pTemplate="item" let-item let-index="index">
         <div
           appOnDragHover
@@ -45,13 +124,49 @@
         [options]="options2"
         pDroppable="outside"
         (onDrop)="dropOutside(options2)"
+        [style]="{ width: '14rem', padding: '0' }"
       >
         <!-- (onDragEnter)="dragOver(1)" -->
         <!-- (onDragEnter)="dragOver($event)" -->
+        <ng-template pTemplate="empty">
+          <div
+            style="
+              background-color: azure;
+              width: 100%;
+              font-size: small;
+              height: 2rem;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              text-align: center;
+              align-content: center;
+              padding: 0;
+              margin: 0;
+            "
+            pDraggable="test"
+            pDroppable="test"
+            (onDragEnter)="dragOver(0, 0)"
+          >
+            Place here!
+          </div>
+        </ng-template>
         <ng-template pTemplate="item" let-item let-index="index">
           <!-- <div style="margin: 10px" pDraggable="test" pDroppable="test"> -->
           <div
-            style="background-color: azure; width: 100%"
+            appOnDragHover
+            style="
+              background-color: azure;
+              width: 100%;
+              font-size: small;
+              height: 2rem;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              text-align: center;
+              align-content: center;
+              padding: 0;
+              margin: 0;
+            "
             pDraggable="test"
             pDroppable="test"
             (onDragStart)="dragStart(index, 1, options2)"
