@@ -10,7 +10,7 @@ import { ListboxModule } from 'primeng/listbox';
 import { DragDropModule } from 'primeng/dragdrop';
 import { OnDragHoverDirective } from './on-drag-hover.directive';
 import { OrderListModule } from 'primeng/orderlist';
-
+import { TableModule } from 'primeng/table';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,6 +24,7 @@ import { OrderListModule } from 'primeng/orderlist';
     ListboxModule,
     DragDropModule,
     OrderListModule,
+    TableModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
