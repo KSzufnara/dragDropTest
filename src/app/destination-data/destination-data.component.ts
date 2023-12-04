@@ -16,6 +16,7 @@ export class DestinationDataComponent implements OnInit {
   startList: number = 0;
 
   insertOver: number = 0;
+  startFromInside: boolean = false;
 
   destinationListId: number = 0;
   ngOnInit(): void {
@@ -28,6 +29,7 @@ export class DestinationDataComponent implements OnInit {
     this.dragService.source = 'inside';
     this.startIndex = index;
     this.startList = startListId;
+    this.startFromInside = true;
     //this.dragService.dragItem=
   }
   drop(event: DragEvent) {
@@ -39,8 +41,34 @@ export class DestinationDataComponent implements OnInit {
     this.destinationListId = destinationLisId;
   }
 
-  dropOutside(destList: Item[]) {
+  dropOutside(destList: Item[], event: DragEvent) {
     console.log('Drop from outside: ', this.dragService.dragItem);
+    const elementRect = (event.target as HTMLElement).getBoundingClientRect();
+    //console.log('eee ', element);
+
+    const eventY = event.y;
+
+    //console.log('event Y:', eventY, v);
+    const hgh = elementRect.height / 2;
+    const topPart = elementRect.top + hgh;
+    const bottomPart = elementRect.bottom - hgh + 1;
+
+    if (elementRect.top <= eventY && eventY <= topPart) {
+      console.log('TOP PART');
+
+      if (this.startFromInside) {
+        // this.insertOver = this.insertOver - 1;
+        console.log('top - 1', this.insertOver);
+      }
+    }
+    if (bottomPart <= eventY && eventY <= elementRect.bottom) {
+      console.log('BOTTOM PART');
+      if (!this.startFromInside) {
+        this.insertOver = this.insertOver + 1;
+        console.log('bottom + 1', this.insertOver);
+      }
+    }
+
     const srcList = this.startList === 0 ? this.options1 : this.options2;
     //this.destinationListId === 0 ? this.options1 : this.options2;
 
@@ -48,7 +76,7 @@ export class DestinationDataComponent implements OnInit {
       this.insertToList(srcList, this.startIndex, destList, this.insertOver);
 
     // list.push(this.dragService.dragItem!);
-
+    this.startFromInside = false;
     this.dragService.dragItem = null;
     //if (listId === 2) this.options2.push(this.dragService.dragItem!);
     //console.log('Event', event /* .dataTransfer?.getData('text') */);

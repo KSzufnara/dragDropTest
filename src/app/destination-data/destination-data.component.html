@@ -1,12 +1,12 @@
 <div style="width: 200px; float: left">
   <!-- pDroppable="test"
   (onDrop)="dropOutside(1, $event)" -->
-  <div pDroppable="test" (onDrop)="dropOutside(options1)">
+  <div pDroppable="test" (onDrop)="dropOutside(options1, $event)">
     <!-- <div> -->
     <p-listbox
       [options]="options1"
       pDroppable="outside"
-      (onDrop)="dropOutside(options1)"
+      (onDrop)="dropOutside(options1, $event)"
       [style]="{ width: '12rem', padding: '0' }"
     >
       <!-- <ng-template pTemplate="empty">
@@ -25,8 +25,8 @@
             justify-content: center;
             text-align: center;
             align-content: center;
-            padding: 0;
-            margin: 0;
+            border-radius: 2px;
+            box-sizing: border-box;
           "
           pDraggable="test"
           pDroppable="test"
@@ -34,17 +34,17 @@
           (onDragEnter)="dragOver(0, index)"
         >
           <!-- (onDrop)="dropInside(options1, index)" -->
-          <h5>{{ item.name }} - {{ item.id }}</h5>
+          <h5 style="pointer-events: none">{{ item.name }} - {{ item.id }}</h5>
         </div>
       </ng-template>
     </p-listbox>
   </div>
-  <div pDroppable="test" (onDrop)="dropOutside(options2)">
+  <div pDroppable="test" (onDrop)="dropOutside(options2, $event)">
     <div>
       <p-listbox
         [options]="options2"
         pDroppable="outside"
-        (onDrop)="dropOutside(options2)"
+        (onDrop)="dropOutside(options2, $event)"
       >
         <!-- (onDragEnter)="dragOver(1)" -->
         <!-- (onDragEnter)="dragOver($event)" -->

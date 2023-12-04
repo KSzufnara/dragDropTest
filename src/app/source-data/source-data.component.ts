@@ -19,5 +19,7 @@ export class SourceDataComponent {
     { name: 'Testowa 1', id: 1 },
     { name: 'Testowa 2', id: 2 },
     { name: 'Testowa 3', id: 3 },
+    { name: 'Testowa 4', id: 4 },
+    { name: 'Testowa 5', id: 5 },
   ];
 }
