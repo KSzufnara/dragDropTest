@@ -45,13 +45,27 @@
         [options]="options2"
         pDroppable="outside"
         (onDrop)="dropOutside(options2, $event)"
+        [style]="{ width: '12rem', padding: '0' }"
       >
         <!-- (onDragEnter)="dragOver(1)" -->
         <!-- (onDragEnter)="dragOver($event)" -->
         <ng-template pTemplate="item" let-item let-index="index">
           <!-- <div style="margin: 10px" pDraggable="test" pDroppable="test"> -->
           <div
-            style="background-color: azure; width: 100%"
+            appOnDragHover
+            style="
+              background-color: azure;
+              width: 100%;
+              font-size: small;
+              height: 2rem;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              text-align: center;
+              align-content: center;
+              border-radius: 2px;
+              box-sizing: border-box;
+            "
             pDraggable="test"
             pDroppable="test"
             (onDragStart)="dragStart(index, 1, options2)"
