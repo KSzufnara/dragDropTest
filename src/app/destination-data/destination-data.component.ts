@@ -57,7 +57,7 @@ export class DestinationDataComponent implements OnInit {
       console.log('TOP PART');
 
       if (this.startFromInside) {
-        // this.insertOver = this.insertOver - 1;
+        this.insertOver = this.insertOver - 1;
         console.log('top - 1', this.insertOver);
       }
     }
@@ -67,11 +67,18 @@ export class DestinationDataComponent implements OnInit {
         this.insertOver = this.insertOver + 1;
         console.log('bottom + 1', this.insertOver);
       }
+      //else this.insertOver--;
     }
 
     const srcList = this.startList === 0 ? this.options1 : this.options2;
     //this.destinationListId === 0 ? this.options1 : this.options2;
-
+    if (srcList == destList) {
+      console.log('The same list!');
+      if (this.insertOver < this.startIndex) {
+        this.insertOver++;
+        console.log('++++');
+      }
+    }
     if (this.dragService.dragItem !== null)
       this.insertToList(srcList, this.startIndex, destList, this.insertOver);
 
@@ -94,7 +101,11 @@ export class DestinationDataComponent implements OnInit {
     destinationList: Item[],
     destinationIndex: number
   ) {
-    if (this.dragService.source === 'inside') sourceList.splice(sourceIndex, 1);
+    let destIndex = destinationIndex;
+    if (this.dragService.source === 'inside') {
+      //if (destinationIndex <= sourceIndex) destinationIndex++;
+      sourceList.splice(sourceIndex, 1);
+    }
     if (destinationList.length > 0)
       destinationList.splice(destinationIndex, 0, this.dragService.dragItem!);
     else destinationList.push(this.dragService.dragItem!);
